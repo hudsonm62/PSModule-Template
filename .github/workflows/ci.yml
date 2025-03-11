@@ -45,14 +45,14 @@ jobs:
         if: ${{ steps.pester.outcome == 'success' }}
         uses: actions/upload-artifact@v4
         with:
-          name: coverage-${{ steps.sha.outputs.sha }}_${{ steps.time.outputs.formatted }}
+          name: coverage-${{ matrix.os }}_${{ steps.sha.outputs.sha }}_${{ steps.time.outputs.formatted }}
           path: coverage.xml
 
       - name: Upload test results
         if: ${{ steps.pester.outcome != 'skipped' }} # run if outcome is success or failure
         uses: actions/upload-artifact@v4
         with:
-          name: testresults-${{ steps.sha.outputs.sha }}_${{ steps.time.outputs.formatted }}
+          name: testresults-${{ matrix.os }}_${{ steps.sha.outputs.sha }}_${{ steps.time.outputs.formatted }}
           path: testResults.xml
 
   analyze:
